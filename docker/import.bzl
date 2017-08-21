@@ -100,11 +100,11 @@ def _docker_import_impl(ctx):
                 docker_parts = docker_parts)
 
 docker_import_ = rule(
-    attrs = {
+    attrs = dict({
         "config": attr.label(allow_files = [".json"]),
         "layers": attr.label_list(allow_files = tgz_filetype),
         "repository": attr.string(default = "bazel"),
-    } + _hash_tools + _layer_tools,
+    }.items() + _hash_tools.items() + _layer_tools.items()),
     executable = True,
     outputs = {
         "out": "%{name}.tar",

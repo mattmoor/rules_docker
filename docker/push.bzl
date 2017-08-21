@@ -78,7 +78,7 @@ def _impl(ctx):
   stamp_inputs +  ([image["legacy"]] if image.get("legacy") else [])))
 
 _docker_push = rule(
-    attrs = {
+    attrs = dict({
         "image": attr.label(
             allow_files = [".tar"],
             single_file = True,
@@ -102,7 +102,7 @@ _docker_push = rule(
             default = False,
             mandatory = False,
         ),
-    } + _layer_tools,
+    }.items() + _layer_tools.items()),
     executable = True,
     implementation = _impl,
 )

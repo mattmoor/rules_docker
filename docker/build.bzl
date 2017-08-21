@@ -294,7 +294,7 @@ def _impl(ctx, files=None, empty_files=None, directory=None,
                 files = depset([ctx.outputs.layer]),
                 docker_parts = docker_parts)
 
-_attrs = {
+_attrs = dict({
     "base": attr.label(allow_files = docker_filetype),
     "data_path": attr.string(),
     "directory": attr.string(default = "/"),
@@ -334,7 +334,7 @@ _attrs = {
         executable = True,
         allow_files = True,
     ),
-} + _hash_tools + _layer_tools
+}.items() + _hash_tools.items() + _layer_tools.items())
 
 _outputs = {
     "out": "%{name}.tar",

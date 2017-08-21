@@ -101,12 +101,12 @@ def _app_layer_impl(ctx):
   # For each of the runfiles we aren't including directly into
   # the application layer, link to their binary-agnostic
   # location from the runfiles path.
-  symlinks = {
+  symlinks = dict({
     binary_name: directory + "/" + basename
-  } + {
+  }.items() + {
     directory + "/" + input: ctx.attr.directory + "/" + input
     for input in available
-  }
+  }.items())
 
   return _docker.build.implementation(
     ctx, files=files, empty_files=empty_files,
